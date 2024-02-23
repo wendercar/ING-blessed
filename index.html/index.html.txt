@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - Banco ING</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form class="login-form" action="procesar_inicio_sesion.py" method="post">
+            <h2>Iniciar sesión</h2>
+            <input type="text" name="nombre_usuario" placeholder="Nombre de usuario" required>
+            <input type="password" name="contraseña" placeholder="Contraseña" required>
+            <button type="submit">Iniciar sesión</button>
+            <p>¿Olvidaste tu contraseña? <a href="#">Recupérala aquí</a></p>
+        </form>
+    </div>
+</body>
+</html>

